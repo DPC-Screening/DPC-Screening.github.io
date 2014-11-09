@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>DPC: Introduction</title>
+</head>
+<body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-45382927-1");
+    pageTracker._trackPageview();
+} catch(err) {}</script>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">DPC</div>
+<div class="menu-item"><a href="index.html" class="current">Home</a></div>
+<div class="menu-item"><a href="introduction.html">Introduction</a></div>
+<div class="menu-item"><a href="download.html">Download</a></div>
+<div class="menu-item"><a href="contact.html">Contact</a></div>
+<div class="menu-category">Others</div>
+<div class="menu-item"><a href="references.html">References</a></div>
+<div class="menu-item"><a href="revision.html">Revision&nbsp;History</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>DPC: Introduction</h1>
+</div>
+<p>Here is a brief introduction of the package.</p>
+<h2>Basic Idea</h2>
+<p>Data with various structures and scales comes from almost every aspect of daily life. To effectively extract patterns in the data and build interpretable models with high prediction accuracy is always desirable. One popular technique to identify important explanatory features is by sparse regularization. The intuition of sparse modeling is based on the observation
+that many real-world data with complex structures and billions of variables can usually be well interpreted by a few most relevant explanatory features. However, for big data when the dimensionality of feature space and the number of samples are extremely large, solving the sparse models remains
+challenging because we may not even be able to load the data matrix into main memory. Therefore, there is an increasingly urgent need for nontraditional sparse modeling techniques to address the challenges posed by big data.</p>
+<p>The idea of &ldquo;screening&rdquo; has been shown very promising in solving Lasso for large-scale problems. Essentially, screening for Lasso aims to quickly identify the &ldquo;inactive features&rdquo; that have 0 components in the solution and then remove them from the optimization. Therefore, we can work on a reduced feature matrix to solve the Lasso problem, which may lead to substantial
+savings in computational cost and memory usage.</p>
+<p>We develop novel screening methods based on the <b>D</b>ual <b>P</b>rojection onto <b>C</b>onvex Set (DPC). Advantages of DPC includes: </p>
+<ul>
+<li><p>The framework of DPC is widely applicable for many popular sparse models, like Lasso, SVM, LAD, Sparse Logistic Regression, Group Lasso, Mixed-norm Regularized Regression, Fused Lasso, etc. The list is still growing. </p>
+</li>
+<li><p>All the DPC rules are safe in the sense that the features or data samples discarded by DPC are guaranteed to have zero coefficients in the solution vectors. Therefore, no accuracy or optimality will be sacrificed.</p>
+</li>
+<li><p>DPC rules can be integrated with <i>any</i> existing solvers and are very easy to implement.  </p>
+</li>
+<li><p>The family of DPC rules has a very low computational cost. </p>
+</li>
+<li><p>Empirically, DPC rules works very well. Experiments show that the DPC rules improve the efficiency of learning sparse models by orders of magnitude.</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>For the DPC (<b>D</b>ual <b>P</b>rojection onto <b>C</b>onvex Set) rules, <b>C</b> (convex set) refers to the dual feasible sets of the sparse models. For example, the dual feasible set of Lasso is a polytobe. Therefore, DPC rule is named DPP in our paper: &ldquo;Lasso Screening Rules via Dual Polytope Projection&rdquo;.</p>
+<div class="infoblock">
+<div class="blocktitle">List of our screening methods</div>
+<div class="blockcontent">
+<ul>
+<li><p><a href="lasso.html">Standard Lasso</a></p>
+</li>
+<li><p><a href="nnlasso.html">Nonnegative Lasso</a></p>
+</li>
+<li><p><a href="glasso.html">Group Lasso</a></p>
+</li>
+<li><p>to be added soon</p>
+</li>
+</ul>
+</div></div>
+<div id="footer">
+<div id="footer-text">
+Page generated 2014-11-08 16:40:09 US Mountain Standard Time, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+(<a href="introduction.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>
