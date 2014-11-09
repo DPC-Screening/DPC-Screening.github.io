@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>DPC (DPP) Screening Methods for Nonnegative Lasso</title>
+</head>
+<body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-45382927-1");
+    pageTracker._trackPageview();
+} catch(err) {}</script>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Jie Wang</div>
+<div class="menu-item"><a href="index.html">Home</a></div>
+<div class="menu-item"><a href="biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="papers.html">Papers</a></div>
+<div class="menu-item"><a href="screening.html">Screening</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>DPC (DPP) Screening Methods for Nonnegative Lasso</h1>
+</div>
+<ul>
+<li><p>Lasso is a widely used spase modeling technique to find sparse representations of an input signal. If we require the coefficients of the sparse representations to be nonnegative, the resulting model is known as the nonnegative Lasso.</p>
+</li>
+<li><p>Similar to standard Lasso，the DPC screening rule for nonnegative Lasso is also called DPP (<b>D</b>ual <b>P</b>rojection onto <b>P</b>olytope). </p>
+</li>
+<li><p>DPP can be integrated with any existing solvers for nonnegative Lasso. The code will be available soon. The implementation of the DPP rule is very easy.</p>
+</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><p><a href="http://arxiv.org/abs/1410.4210">Two-Layer Feature Reduction for Sparse-Group Lasso via Decomposition of Convex Sets</a>. <font color="red">Spotlight</font> <br />   
+Jie Wang and Jieping Ye. <br />
+NIPS 2014. [<a href="software/DPC_package_2.0.1.zip"><font color="red">Code Download</font></a>]</p>
+</li>
+</ul>
+<h2>Formulation of Nonnegative Lasso</h2>
+<p>Let <img class="eq" src="eqs/718916002-130.png" alt="{bf y}" style="vertical-align: -4px" /> denote the <img class="eq" src="eqs/1394095439-130.png" alt="N" style="vertical-align: -0px" /> dimensional response vector and <img class="eq" src="eqs/1254447840-130.png" alt="{bf X} = [{bf x}_1, {bf x}_2, ldots, {bf x}_p]" style="vertical-align: -6px" /> be the <img class="eq" src="eqs/2047291190-130.png" alt="N times p" style="vertical-align: -4px" /> feature matrix. Let <img class="eq" src="eqs/425226224-130.png" alt="lambdageq0" style="vertical-align: -3px" /> be the regularization parameter. The nonnegative Lasso problem is formulated as the following optimization problem:</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1124843026-130.png" alt=" inf_{beta in mathbb{R}_+^p} frac{1}{2}left|{bf y - X beta}right|_2^2 + lambda |{beta}|_1, " />
+<br /></div><p>where <img class="eq" src="eqs/2045716748-130.png" alt="mathbb{R}_+^p" style="vertical-align: -7px" /> is the set of all vectors in <img class="eq" src="eqs/1330206908-130.png" alt="mathbb{R}^p" style="vertical-align: -0px" /> with nonnegative components.
+The dual problem of nonnegative Lasso is </p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1857514889-130.png" alt=" sup_{theta}quad left{frac{1}{2}|{bf y}|_2^2 - frac{lambda^2}{2}left|theta - frac{{bf y}}{lambda}right|_2^2:,, {bf x}_i^{T}thetaleq 1,,i=1,2,ldots,pright}, " />
+<br /></div><p>We denote the primal and dual optimal solutions of nonnegative Lasso by <img class="eq" src="eqs/752069520-130.png" alt="beta^*(lambda)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1096324287-130.png" alt="theta^*(lambda)" style="vertical-align: -5px" />, respectively, which depend on the value of <img class="eq" src="eqs/777679242-130.png" alt="lambda" style="vertical-align: -1px" />. <img class="eq" src="eqs/752069520-130.png" alt="beta^*(lambda)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1096324287-130.png" alt="theta^*(lambda)" style="vertical-align: -5px" /> are related by</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1426663324-130.png" alt=" {bf y} = {bf X}beta^*(lambda) + lambda theta^*(lambda). " />
+<br /></div><p>Moreover, it is easy to see that the dual optimal solution is the projection of <img class="eq" src="eqs/718031761-130.png" alt="frac{bf y}{lambda}" style="vertical-align: -8px" /> onto the dual feasible set, which is a polytope.</p>
+<h2>Enhanced DPP (EDPP) rule for nonnegative Lasso</h2>
+<p>Let us define</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/180857369-130.png" alt=" lambda_{rm max}=max_i{bf x}_i^T {bf y}. " />
+<br /></div><p>For all <img class="eq" src="eqs/1555361938-130.png" alt="lambda in [lambda_{rm max}, infty)" style="vertical-align: -5px" />, we have</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1214812658-130.png" alt=" beta^*(lambda) = 0, theta^*(lambda) = frac{bf y}{lambda}. " />
+<br /></div><p>In other words, <font color="red">the nonnegative Lasso problem admits closed form solutions when</font> <img class="eq" src="eqs/284253357-130.png" alt="lambda geq lambda_{rm max}" style="vertical-align: -4px" />.</p>
+<p>Let <img class="eq" src="eqs/1139229832-130.png" alt="lambda_0 in (0,lambda_{rm max}]" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1747055416-130.png" alt="lambda in (0,lambda_0]" style="vertical-align: -5px" />. We define</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1991174410-130.png" alt=" {bf x}_* = {rm argmax}_{{bf x}_i} {bf x}_i^T {bf y}, " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/1398944913-130.png" alt="   {bf v}_1(lambda_0) = left{   begin{array}{ll}   frac{bf y}{lambda_0} - theta^*(lambda_0), &amp; {rm if} hspace{2mm} lambda_0 in (0, lambda_{rm max}),    {bf x}_*, &amp; {rm if} hspace{2mm} lambda_0 = lambda_{rm max}.    end{array}right. " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/1546467390-130.png" alt=" {bf v}_2(lambda, lambda_0) = frac{bf y}{lambda} - theta^*(lambda_0), " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/1568140626-130.png" alt=" {bf v}_2^{perp}(lambda, lambda_0) = {bf v}_2(lambda, lambda_0) - frac{langle{bf v}_1(lambda_0),{bf v}_2(lambda, lambda_0)rangle}{|{bf v}_1(lambda_0)|_2^2}{bf v}_1(lambda_0). " />
+<br /></div><div class="infoblock">
+<div class="blocktitle">EDPP Screening Rule for nonnegative Lasso</div>
+<div class="blockcontent">
+<ul>
+<li><p>For the nonnegative Lasso problem, suppose we are given a sequence of parameter values <img class="eq" src="eqs/1624838404-130.png" alt="lambda_{rm max} = lambda_0&gt;lambda_1&gt;ldots&gt;lambda_{mathcal{K}}" style="vertical-align: -4px" />. Then for any integer <img class="eq" src="eqs/1497719439-130.png" alt="0leq k &lt; mathcal{K}" style="vertical-align: -3px" />, we have <img class="eq" src="eqs/1046656579-130.png" alt="[beta^*(lambda_{k+1})]_i=0" style="vertical-align: -5px" /> if <img class="eq" src="eqs/2127365376-130.png" alt="beta^*(lambda_k)" style="vertical-align: -5px" /> is known and the following holds:</p>
+</li>
+</ul>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1023508387-130.png" alt=" {bf x}_i^Tleft(frac{{bf y}-{bf X}beta^*(lambda_k)}{lambda_k}+frac{1}{2}{bf v}_2^{perp}(lambda_{k+1},lambda_k)right)&lt;1-frac{1}{2}|{bf v}_2^{perp}(lambda_{k+1},lambda_k)|_2|{bf x}_i|_2. " />
+<br /></div></div></div>
+<div class="infoblock">
+<div class="blocktitle">A Few More Comments of EDPP</div>
+<div class="blockcontent">
+<ul>
+<li><p>To start from <img class="eq" src="eqs/1691690048-130.png" alt="lambda_{rm max}" style="vertical-align: -4px" />, it is worthwhile to note that <img class="eq" src="eqs/607407660-130.png" alt="theta^*(lambda_{rm max}) = frac{bf y}{lambda_{rm max}}" style="vertical-align: -9px" /> and <img class="eq" src="eqs/685714931-130.png" alt="beta^*(lambda_{rm max}) = 0" style="vertical-align: -5px" />. </p>
+</li>
+<li><p>At the <img class="eq" src="eqs/1656129685-130.png" alt="k^{th}" style="vertical-align: -1px" /> step, suppose that <img class="eq" src="eqs/2127365376-130.png" alt="beta^*(lambda_k)" style="vertical-align: -5px" /> is known. To determine the zero coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />, EDPP needs to compute <img class="eq" src="eqs/1403696321-130.png" alt="{bf v}_2^{perp}(lambda, lambda_0)" style="vertical-align: -5px" />, which depends on <img class="eq" src="eqs/2108774297-130.png" alt="{bf v}_2(lambda_{k+1}, lambda_k)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/37742872-130.png" alt="{bf v}_1(lambda_k)" style="vertical-align: -5px" />. Thus, we need to compute <img class="eq" src="eqs/152874323-130.png" alt="theta^*(lambda_k)" style="vertical-align: -5px" />. Indeed, <img class="eq" src="eqs/152874323-130.png" alt="theta^*(lambda_k)" style="vertical-align: -5px" /> can be computed by <img class="eq" src="eqs/601400083-130.png" alt="frac{{bf y}-{bf X} beta^*(lambda_k)}{lambda_k}" style="vertical-align: -10px" />.</p>
+</li>
+<li><p>After EDPP tells you the zero coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />, the corresponding features can be removed from the optimization and you can apply your favourite solver to solve for the remaining coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />. Then, go to the next step until the Lasso problems at all given parameter values are solved.</p>
+</li>
+</ul>
+</div></div>
+<div id="footer">
+<div id="footer-text">
+Page generated 2014-11-05 12:27:23 US Mountain Standard Time, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+(<a href="nnlasso.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>DPC Screening Methods for Standard Lasso</title>
+</head>
+<body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-45382927-1");
+    pageTracker._trackPageview();
+} catch(err) {}</script>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Jie Wang</div>
+<div class="menu-item"><a href="index.html">Home</a></div>
+<div class="menu-item"><a href="biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="papers.html">Papers</a></div>
+<div class="menu-item"><a href="screening.html">Screening</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>DPC Screening Methods for Standard Lasso</h1>
+</div>
+<ul>
+<li><p>For standard Lasso，the DPC screening rule is called DPP (<b>D</b>ual <b>P</b>rojection onto <b>P</b>olytope). </p>
+</li>
+<li><p>DPP can be integrated with any existing solvers for Lasso. You can either try our <a href="software/DPC_package_2.0.zip">code</a> implemented in Matlab to see the performance or integrate it with your favourite solver. The implementation of the DPP rule is very easy.</p>
+</li>
+</ul>
+<h2>Publications</h2>
+<ul>
+<li><p><a href="http://arxiv.org/abs/1211.3966v3/">Lasso Screening Rules via Dual Polytope Projection</a>.   (<font color="red">Improved version</font> of the one accepted by NIPS 2013)<br />
+Jie Wang, Peter Wonka, and Jieping Ye. <br />
+Journal of Machine Learning Research, to appear. [<a href="software/DPC_package_2.0.1.zip"><font color="red">Code Download</font></a>]</p>
+</li>
+<li><p><a href="publications/DPP.pdf">Lasso Screening Rules via Dual Polytope Projection</a>. <br />
+Jie Wang, Jiayu Zhou, and Peter Wonka, Jieping Ye. <br />
+NIPS 2013. </p>
+</li>
+</ul>
+<p><font color="red">Notice that</font>, the Enhanced DPP (EDPP) rule to appear in JMLR is <font color="red">an improved version</font> of the EDPP rule in the NIPS paper. They are <font color="red">NOT</font> the same. </p>
+<p>The EDPP rule in the NIPS paper refers to &ldquo;<b>Improvement 1</b>&rdquo; in the journal version. The EDPP rule introduced below refers to the one in the journal version. </p>
+<h2>Formulation of Standard Lasso</h2>
+<p>Let <img class="eq" src="eqs/718916002-130.png" alt="{bf y}" style="vertical-align: -4px" /> denote the <img class="eq" src="eqs/1394095439-130.png" alt="N" style="vertical-align: -0px" /> dimensional response vector and <img class="eq" src="eqs/1254447840-130.png" alt="{bf X} = [{bf x}_1, {bf x}_2, ldots, {bf x}_p]" style="vertical-align: -6px" /> be the <img class="eq" src="eqs/2047291190-130.png" alt="N times p" style="vertical-align: -4px" /> feature matrix. Let <img class="eq" src="eqs/425226224-130.png" alt="lambdageq0" style="vertical-align: -3px" /> be the regularization parameter. The Lasso problem is formulated as the following optimization problem:</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1095356928-130.png" alt=" inf_{beta in mathbb{R}^p} frac{1}{2}left|{bf y - X beta}right|_2^2 + lambda |{beta}|_1. " />
+<br /></div><p>The dual problem of Lasso is </p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1362892719-130.png" alt=" sup_{theta}quad left{frac{1}{2}|{bf y}|_2^2 - frac{lambda^2}{2}left|theta - frac{{bf y}}{lambda}right|_2^2:,, |{bf x}_i^{T}theta|leq 1,,i=1,2,ldots,pright}, " />
+<br /></div><p>We denote the primal and dual optimal solutions of Lasso by <img class="eq" src="eqs/752069520-130.png" alt="beta^*(lambda)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1096324287-130.png" alt="theta^*(lambda)" style="vertical-align: -5px" />, respectively, which depend on the value of <img class="eq" src="eqs/777679242-130.png" alt="lambda" style="vertical-align: -1px" />. <img class="eq" src="eqs/752069520-130.png" alt="beta^*(lambda)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1096324287-130.png" alt="theta^*(lambda)" style="vertical-align: -5px" /> are related by</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1426663324-130.png" alt=" {bf y} = {bf X}beta^*(lambda) + lambda theta^*(lambda). " />
+<br /></div><p>Moreover, it is easy to see that the dual optimal solution is the projection of <img class="eq" src="eqs/718031761-130.png" alt="frac{bf y}{lambda}" style="vertical-align: -8px" /> onto the dual feasible set, which is a polytope.</p>
+<h2>Enhanced DPP (EDPP) rule for standard Lasso</h2>
+<p>Let us define</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1387344693-130.png" alt=" lambda_{rm max}=|{bf X}^T {bf y}|_{infty}. " />
+<br /></div><p>It is well-known that <img class="eq" src="eqs/495342904-130.png" alt="forall lambda in [lambda_{rm max}, infty)" style="vertical-align: -5px" />, we have</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1214812658-130.png" alt=" beta^*(lambda) = 0, theta^*(lambda) = frac{bf y}{lambda}. " />
+<br /></div><p>In other words, <font color="red">the Lasso problem admits closed form solutions when</font> <img class="eq" src="eqs/284253357-130.png" alt="lambda geq lambda_{rm max}" style="vertical-align: -4px" />.</p>
+<p>Let <img class="eq" src="eqs/1139229832-130.png" alt="lambda_0 in (0,lambda_{rm max}]" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1747055416-130.png" alt="lambda in (0,lambda_0]" style="vertical-align: -5px" />. We define</p>
+
+<div class="eqwl"><img class="eqwl" src="eqs/1353088682-130.png" alt=" {bf x}_* = {rm argmax}_{{bf x}_i} |{bf x}_i^T {bf y}|, " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/2012073805-130.png" alt="   {bf v}_1(lambda_0) = left{   begin{array}{ll}   frac{bf y}{lambda_0} - theta^*(lambda_0), &amp; {rm if} hspace{2mm} lambda_0 in (0, lambda_{rm max}),    {rm sign}({bf x}_*^T {bf y}){bf x}_*, &amp; {rm if} hspace{2mm} lambda_0 = lambda_{rm max}.    end{array}right. " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/1546467390-130.png" alt=" {bf v}_2(lambda, lambda_0) = frac{bf y}{lambda} - theta^*(lambda_0), " />
+<br /></div>
+<div class="eqwl"><img class="eqwl" src="eqs/1568140626-130.png" alt=" {bf v}_2^{perp}(lambda, lambda_0) = {bf v}_2(lambda, lambda_0) - frac{langle{bf v}_1(lambda_0),{bf v}_2(lambda, lambda_0)rangle}{|{bf v}_1(lambda_0)|_2^2}{bf v}_1(lambda_0). " />
+<br /></div><div class="infoblock">
+<div class="blocktitle">EDPP Screening Rule for Lasso</div>
+<div class="blockcontent">
+<ul>
+<li><p>For the Lasso problem, suppose we are given a sequence of parameter values <img class="eq" src="eqs/1624838404-130.png" alt="lambda_{rm max} = lambda_0&gt;lambda_1&gt;ldots&gt;lambda_{mathcal{K}}" style="vertical-align: -4px" />. Then for any integer <img class="eq" src="eqs/1497719439-130.png" alt="0leq k &lt; mathcal{K}" style="vertical-align: -3px" />, we have <img class="eq" src="eqs/1046656579-130.png" alt="[beta^*(lambda_{k+1})]_i=0" style="vertical-align: -5px" /> if <img class="eq" src="eqs/2127365376-130.png" alt="beta^*(lambda_k)" style="vertical-align: -5px" /> is known and the following holds:</p>
+</li>
+</ul>
+
+<div class="eqwl"><img class="eqwl" src="eqs/107572585-130.png" alt=" left|{bf x}_i^Tleft(frac{{bf y}-{bf X}beta^*(lambda_k)}{lambda_k}+frac{1}{2}{bf v}_2^{perp}(lambda_{k+1},lambda_k)right)right|&lt;1-frac{1}{2}|{bf v}_2^{perp}(lambda_{k+1},lambda_k)|_2|{bf x}_i|_2. " />
+<br /></div></div></div>
+<div class="infoblock">
+<div class="blocktitle">A Few More Comments of EDPP</div>
+<div class="blockcontent">
+<ul>
+<li><p>To start from <img class="eq" src="eqs/1691690048-130.png" alt="lambda_{rm max}" style="vertical-align: -4px" />, it is worthwhile to note that <img class="eq" src="eqs/607407660-130.png" alt="theta^*(lambda_{rm max}) = frac{bf y}{lambda_{rm max}}" style="vertical-align: -9px" /> and <img class="eq" src="eqs/685714931-130.png" alt="beta^*(lambda_{rm max}) = 0" style="vertical-align: -5px" />. </p>
+</li>
+<li><p>At the <img class="eq" src="eqs/1656129685-130.png" alt="k^{th}" style="vertical-align: -1px" /> step, suppose that <img class="eq" src="eqs/2127365376-130.png" alt="beta^*(lambda_k)" style="vertical-align: -5px" /> is known. To determine the zero coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />, EDPP needs to compute <img class="eq" src="eqs/1403696321-130.png" alt="{bf v}_2^{perp}(lambda, lambda_0)" style="vertical-align: -5px" />, which depends on <img class="eq" src="eqs/2108774297-130.png" alt="{bf v}_2(lambda_{k+1}, lambda_k)" style="vertical-align: -5px" /> and <img class="eq" src="eqs/37742872-130.png" alt="{bf v}_1(lambda_k)" style="vertical-align: -5px" />. Thus, we need to compute <img class="eq" src="eqs/152874323-130.png" alt="theta^*(lambda_k)" style="vertical-align: -5px" />. Indeed, <img class="eq" src="eqs/152874323-130.png" alt="theta^*(lambda_k)" style="vertical-align: -5px" /> can be computed by <img class="eq" src="eqs/601400083-130.png" alt="frac{{bf y}-{bf X} beta^*(lambda_k)}{lambda_k}" style="vertical-align: -10px" />.</p>
+</li>
+<li><p>After EDPP tells you the zero coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />, the corresponding features can be removed from the optimization and you can apply your favourite solver to solve for the remaining coefficients of <img class="eq" src="eqs/1762230536-130.png" alt="beta^*(lambda_{k+1})" style="vertical-align: -5px" />. Then, go to the next step until the Lasso problems at all given parameter values are solved.</p>
+</li>
+</ul>
+</div></div>
+<div id="footer">
+<div id="footer-text">
+Page generated 2014-11-05 12:27:19 US Mountain Standard Time, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+(<a href="lasso.jemdoc">source</a>)
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>
